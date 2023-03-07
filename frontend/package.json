@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "daisyui": "^2.51.3",
     "dotenv": "^16.0.3",
     "pinia": "^2.0.33",
     "vue": "^3.2.45",
