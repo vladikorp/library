@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.0.16",
     "daisyui": "^2.51.3",
     "dotenv": "^16.0.3",
     "pinia": "^2.0.33",

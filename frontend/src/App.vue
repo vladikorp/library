@@ -1,10 +1,10 @@
 <template>
 
-  <div id="app">
+  <div id="app" class="font-sans text-lg font-semibold">
 
     <Navbar/>
     <router-view></router-view>
-    
+
   </div>
 
 </template>
