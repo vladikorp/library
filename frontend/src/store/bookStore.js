@@ -1,10 +1,15 @@
 import { defineStore } from 'pinia'
 import BookApi from '../api/bookApi'
 
-const bookStore = defineStore('bookStore', {
-  state: ({
+export const useBookStore = defineStore('bookStore', {
+  state: () => ({
     books: {},
     booksLoaded: false,
+
+    page: 1,
+    pageSize: 10,
+
+    booksPaginated: {},
 
     filter: {
       subject: '',
