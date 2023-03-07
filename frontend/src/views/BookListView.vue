@@ -1,11 +1,15 @@
 <template>
   <div>
-    Books list here
+
+    <PageContent>
+      <p>Books page</p>
+    </PageContent>
+
   </div>
 </template>
 
 <script setup>
-
+import PageContent from '../components/PageContent.vue';
 </script>
 
 <style scoped>
