@@ -9,29 +9,22 @@
             :class="showFilters ? '': 'hidden md:flex'">
           
           <LInputField
-            title="some input"
-            placeholder="some"
-            v-model:text="field1"
+            title="Предмет"
+            placeholder="Пошук за предметом"
+            v-model:text="bookStore.filter.subject"
           />
 
           <LInputField
-            title="some input"
-            placeholder="some"
-            v-model:text="field1"
+            title="Автор"
+            placeholder="Пошук за автором"
+            v-model:text="bookStore.filter.author"
           />
 
           <LInputField
-            title="some input"
-            placeholder="some"
-            v-model:text="field1"
+            title="Назва"
+            placeholder="Пошук за назвою"
+            v-model:text="bookStore.filter.title"
           />
-
-          <LInputField
-            title="some input"
-            placeholder="some"
-            v-model:text="field1"
-          />
-
 
         </div>
 
@@ -48,11 +41,23 @@
 </template>
 
 <script setup>
+
+// Vue imports
 import { ref } from 'vue'
+import { useBookStore } from '../store/bookStore'
+
+// Components
 import PageContent from '../components/layout/PageContent.vue';
 import LInputField from '../components/controls/LInputField.vue';
 
-const field1 = ref('')
+// Functions
+import { useDebounceFn } from '@vueuse/core'
+
+const bookStore = useBookStore()
+
+const search = useDebounceFn(() => {
+  bookStore.listBooks()
+}, 500)
 
 
 </script>
