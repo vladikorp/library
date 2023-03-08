@@ -1,14 +1,55 @@
 <template>
-  <div>
 
-  </div>
+  <LPageContent>
+
+    <div class="flex flex-col items-center gap-4">
+
+      <LInputField
+        title="Користувач"
+        v-model:text="loginData.username"
+      />
+
+      <LInputField
+        title="Пароль"
+        v-model:text="loginData.password"
+        :is-password="true"
+      />
+
+      <LButton class="btn-primary`" 
+        title="Авторизуватись"
+        @click="loginUser()"
+      />
+
+      <div class="divider select-none">Або</div>
+
+      <div class="flex flex-col flex-wrap">
+        <LButton class="btn-ghost" @click="navigateToRegistration" title="Зареєструватися"/>
+        <LButton class="btn-ghost" @click="navigateToForgotPassword" title="Відновити пароль?" />
+      </div>
+
+
+    </div>
+
+  </LPageContent>
+
+
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+
 import { AuthenticationDetails } from "amazon-cognito-identity-js";
-import { useUserStore } from "@/store/authStore";
+import { useUserStore } from "../store/userStore";
+
+// Components
+import LPageContent from '../components/layout/PageContent.vue'
+import LInputField  from '../components/controls/LInputField.vue'
+import LButton      from '../components/controls/LButton.vue'
+
+// Toast
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css'
 
 const userStore = useUserStore()
 
@@ -28,7 +69,7 @@ const loginData = ref({
 });
 
 const loginUser = () => {
-  const cognitoUser = authStore.createCognitoUser(loginData.value.username)
+  const cognitoUser = userStore.createCognitoUser(loginData.value.username)
 
   const authenticationDetails = new AuthenticationDetails({
     Username: loginData.value.username,
@@ -37,15 +78,15 @@ const loginUser = () => {
 
   cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: async (result) => {
-      authStore.userSession = result
+      userStore.userSession = result
 
       cognitoUser.getUserAttributes((error, attributes) => {
         if (error) {
-          authStore.userSession = null
-          authStore.userAttributes = null
+          userStore.userSession = null
+          userStore.userAttributes = null
           return
         }
-        authStore.userAttributes = attributes
+        userStore.userAttributes = attributes
         router.push({ name: "Dashboard" });
       })
     },

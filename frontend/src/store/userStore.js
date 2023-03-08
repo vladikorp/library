@@ -12,7 +12,7 @@ export const useUserStore = defineStore('userStore', {
     userAttributesMap: null,
     userPool: new CognitoUserPool({
       UserPoolId: env.VITE_APP_COGNITO_USER_POOL_ID,
-      ClientId: env.VIT_APP_COGNITO_CLIENT_ID
+      ClientId: env.VITE_APP_COGNITO_CLIENT_ID
     })
 
   }),
@@ -76,6 +76,13 @@ export const useUserStore = defineStore('userStore', {
 
       return isValid
     },
-    
+
+    createCognitoUser(username) {
+      return new CognitoUser({
+        Username: username,
+        Pool: this.userPool,
+      })
+    }
+
   }
 })
