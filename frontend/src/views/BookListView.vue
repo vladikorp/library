@@ -26,15 +26,31 @@
             v-model:text="bookStore.filter.title"
           />
 
+          <LInputField
+            title="Рік публікації"
+            placeholder="Пошук за назвою"
+            v-model:text="bookStore.filter.title"
+          />
+
+          <LInputField
+            title="Видавець"
+            placeholder="Пошук за назвою"
+            v-model:text="bookStore.filter.title"
+          />
+
         </div>
 
       </div>
 
-      <div class="divider lg:divider-horizontal">
+      <div class="divider lg:divider-horizontal"></div>
 
-      </div>
-
-
+      <BookCardComponent 
+        :type="mockBook.type" 
+        :title="mockBook.title"
+        :publisher="mockBook.publisher"
+        @navigate-to-details="navigateToDetails"
+      />
+      
     </PageContent>
 
   </div>
@@ -49,9 +65,17 @@ import { useBookStore } from '../store/bookStore'
 // Components
 import PageContent from '../components/layout/PageContent.vue';
 import LInputField from '../components/controls/LInputField.vue';
+import BookCardComponent from '../components/entities/BookCardComponent.vue';
 
 // Functions
 import { useDebounceFn } from '@vueuse/core'
+import { useRouter } from 'vue-router';
+
+const mockBook = {
+  type: "sdfsdfdf",
+  title: "sss",
+  publisher: "yyy"
+}
 
 const bookStore = useBookStore()
 
@@ -59,6 +83,14 @@ const search = useDebounceFn(() => {
   bookStore.listBooks()
 }, 500)
 
+
+const router = useRouter()
+
+const navigateToDetails = () => {
+  router.push({
+    name: "BookDetails"
+  })
+}
 
 </script>
 
