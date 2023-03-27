@@ -9,12 +9,14 @@
         <div class="context flex flex-row w-5/6">
 
           <div class="icon flex">
+
             <BookOpenIcon               v-if="props.type === 'book'"      class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
             <BookmarkSquareIcon         v-if="props.type === 'magazine'"  class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
             <NewspaperIcon              v-if="props.type === 'newspaper'" class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
             <ClipboardDocumentCheckIcon v-if="props.type === 'article'"   class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
+            
           </div>
-          
+
           <div class="content flex-col pl-7">
             <div class="flex text-[30px]">{{ props.title }}</div>
             <div class="flex text-[12px] mt-2">{{ props.type }}</div>
