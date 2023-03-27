@@ -4,6 +4,10 @@
 
     <div class="flex flex-col items-center gap-4">
 
+      <div>
+        
+      </div>
+
       <LInputField
         title="Користувач"
         v-model:text="loginData.username"
@@ -69,32 +73,36 @@ const loginData = ref({
 });
 
 const loginUser = () => {
-  const cognitoUser = userStore.createCognitoUser(loginData.value.username)
+  return null
+}
 
-  const authenticationDetails = new AuthenticationDetails({
-    Username: loginData.value.username,
-    Password: loginData.value.password,
-  });
+// const loginUser = () => {
+//   const cognitoUser = userStore.createCognitoUser(loginData.value.username)
 
-  cognitoUser.authenticateUser(authenticationDetails, {
-    onSuccess: async (result) => {
-      userStore.userSession = result
+//   const authenticationDetails = new AuthenticationDetails({
+//     Username: loginData.value.username,
+//     Password: loginData.value.password,
+//   });
 
-      cognitoUser.getUserAttributes((error, attributes) => {
-        if (error) {
-          userStore.userSession = null
-          userStore.userAttributes = null
-          return
-        }
-        userStore.userAttributes = attributes
-        router.push({ name: "Dashboard" });
-      })
-    },
-    onFailure: (error) => {
-      createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'danger', position: 'top-center'})
-    },
-  });
-};
+//   cognitoUser.authenticateUser(authenticationDetails, {
+//     onSuccess: async (result) => {
+//       userStore.userSession = result
+
+//       cognitoUser.getUserAttributes((error, attributes) => {
+//         if (error) {
+//           userStore.userSession = null
+//           userStore.userAttributes = null
+//           return
+//         }
+//         userStore.userAttributes = attributes
+//         router.push({ name: "Dashboard" });
+//       })
+//     },
+//     onFailure: (error) => {
+//       createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'danger', position: 'top-center'})
+//     },
+//   });
+// };
 
 
 

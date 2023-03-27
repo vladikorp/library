@@ -10,10 +10,10 @@ export const useUserStore = defineStore('userStore', {
     userSession: null,
     userAttributes: null,
     userAttributesMap: null,
-    userPool: new CognitoUserPool({
-      UserPoolId: env.VITE_APP_COGNITO_USER_POOL_ID,
-      ClientId: env.VITE_APP_COGNITO_CLIENT_ID
-    })
+    // userPool: new CognitoUserPool({
+    //   UserPoolId: env.VITE_APP_COGNITO_USER_POOL_ID,
+    //   ClientId: env.VITE_APP_COGNITO_CLIENT_ID
+    // })
 
   }),
 

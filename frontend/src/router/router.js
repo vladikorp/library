@@ -13,6 +13,16 @@ const routes = [
         component: () => import('../views/LoginView.vue')
       },
       {
+        path: "register",
+        name: "Registration",
+        component: () => import('../views/RegisterView.vue')
+      },
+      {
+        path: "forgotPassword",
+        name: "ForgotPassword",
+        component: () => import('../views/ForgotPasswordView.vue')
+      },
+      {
         path: "home",
         name: "Home",
         component: () => import('../views/HomeView.vue')
