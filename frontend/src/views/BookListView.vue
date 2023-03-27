@@ -44,13 +44,82 @@
 
       <div class="divider lg:divider-horizontal"></div>
 
-      <BookCardComponent 
+      <div class="bookList flex flex-col">
+        <BookCardComponent 
         :type="mockBook.type" 
         :title="mockBook.title"
         :publisher="mockBook.publisher"
         @navigate-to-details="navigateToDetails"
-      />
+        />
+        <BookCardComponent 
+          :type="mockMagazine.type" 
+          :title="mockMagazine.title"
+          :publisher="mockMagazine.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockNewspaper.type" 
+          :title="mockNewspaper.title"
+          :publisher="mockNewspaper.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockArticle.type" 
+          :title="mockArticle.title"
+          :publisher="mockArticle.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+        :type="mockBook.type" 
+        :title="mockBook.title"
+        :publisher="mockBook.publisher"
+        @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockMagazine.type" 
+          :title="mockMagazine.title"
+          :publisher="mockMagazine.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockNewspaper.type" 
+          :title="mockNewspaper.title"
+          :publisher="mockNewspaper.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockArticle.type" 
+          :title="mockArticle.title"
+          :publisher="mockArticle.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+        :type="mockBook.type" 
+        :title="mockBook.title"
+        :publisher="mockBook.publisher"
+        @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockMagazine.type" 
+          :title="mockMagazine.title"
+          :publisher="mockMagazine.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockNewspaper.type" 
+          :title="mockNewspaper.title"
+          :publisher="mockNewspaper.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+        <BookCardComponent 
+          :type="mockArticle.type" 
+          :title="mockArticle.title"
+          :publisher="mockArticle.publisher"
+          @navigate-to-details="navigateToDetails"
+        />
+      </div>
       
+
     </PageContent>
 
   </div>
@@ -72,10 +141,30 @@ import { useDebounceFn } from '@vueuse/core'
 import { useRouter } from 'vue-router';
 
 const mockBook = {
-  type: "sdfsdfdf",
-  title: "sss",
-  publisher: "yyy"
+  type: "book",
+  title: "TitleBook",
+  publisher: "Publisher",
+  notes: "Notes: Younus, Arjumand ; Qureshi, M Atif ; Saeed, Muhammad ; Ali, Syed Asim ; Touheed, Nasir ; Qureshi, M Shahid International journal of computer science issues, 2011, Vol.8 (3), p.438"
 }
+const mockMagazine = {
+  type: "magazine",
+  title: "TitleBook",
+  publisher: "Publisher",
+  notes: "Notes: Younus, Arjumand ; Qureshi, M Atif ; Saeed, Muhammad ; Ali, Syed Asim ; Touheed, Nasir ; Qureshi, M Shahid International journal of computer science issues, 2011, Vol.8 (3), p.438"
+}
+const mockNewspaper = {
+  type: "newspaper",
+  title: "TitleBook",
+  publisher: "Publisher",
+  notes: "Notes: Younus, Arjumand ; Qureshi, M Atif ; Saeed, Muhammad ; Ali, Syed Asim ; Touheed, Nasir ; Qureshi, M Shahid International journal of computer science issues, 2011, Vol.8 (3), p.438"
+}
+const mockArticle = {
+  type: "article",
+  title: "TitleBook",
+  publisher: "Publisher",
+  notes: "Notes: Younus, Arjumand ; Qureshi, M Atif ; Saeed, Muhammad ; Ali, Syed Asim ; Touheed, Nasir ; Qureshi, M Shahid International journal of computer science issues, 2011, Vol.8 (3), p.438"
+}
+
 
 const bookStore = useBookStore()
 

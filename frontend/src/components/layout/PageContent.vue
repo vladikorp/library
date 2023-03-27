@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap mt-5 ml-16 mr-16 bg-gray-200 rounded-xl shadow border">
+  <div class="flex justify-center mt-5 h-full ml-16 mr-16 bg-gray-200 rounded-xl shadow border">
     <slot></slot>
   </div>
 </template>
