@@ -37,6 +37,11 @@ const routes = [
         name: "BookDetails",
         component: () => import('../views/BookDetailsView.vue')
       },
+      {
+        path: "bookCreate",
+        name: "BookCreate",
+        component: () => import('../views/BookCreateView.vue')
+      },
     ]
   },
   {

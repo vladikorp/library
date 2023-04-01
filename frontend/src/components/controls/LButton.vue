@@ -1,6 +1,5 @@
 <template>
-  <button class="btn-primary">
-        <slot></slot>
+    <button class="btn-primary">
         <div v-if="props.title">{{ props.title }}</div>
     </button>
 </template>

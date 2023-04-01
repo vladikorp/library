@@ -1,28 +1,37 @@
 <template>
 
-  <LPageContent>
+<PageContent>
 
-    <div class="flex flex-col items-center gap-4">
-
-      <div>
-        
+    <div class="flex flex-col items-center pt-[24px] pb-[18px] w-1/4">
+      
+      <div class="text-2xl font-bold pb-[16px]">
+        Авторизація
       </div>
 
-      <LInputField
-        title="Користувач"
-        v-model:text="loginData.username"
-      />
+      <div class="flex flex-col w-full">
+        
+        <LInputField
+          title="Користувач"
+          placeholder="Ім'я користувача"
+          v-model:text="loginData.username"
+        />
 
-      <LInputField
-        title="Пароль"
-        v-model:text="loginData.password"
-        :is-password="true"
-      />
+        <LInputField
+          title="Пароль"          
+          placeholder="Пароль користувача" 
+          v-model:text="loginData.password"
+          :is-password="true"
+        /> 
 
-      <LButton class="btn-primary`" 
-        title="Авторизуватись"
-        @click="loginUser()"
-      />
+        <LButton class="w-[230px] m-auto mt-[16px] rounded-md h-10" 
+          title="Авторизуватись"
+          @click="loginUser()"
+        />
+      </div>
+
+      
+
+      
 
       <div class="divider select-none">Або</div>
 
@@ -33,8 +42,7 @@
 
 
     </div>
-
-  </LPageContent>
+  </PageContent>
 
 
 </template>
@@ -54,6 +62,7 @@ import LButton      from '../components/controls/LButton.vue'
 // Toast
 import { createToast } from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css'
+import PageContent from "../components/layout/PageContent.vue";
 
 const userStore = useUserStore()
 

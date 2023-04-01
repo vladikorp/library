@@ -9,27 +9,27 @@
         <div class="context flex flex-row w-5/6">
 
           <div class="icon flex">
-
             <BookOpenIcon               v-if="props.type === 'book'"      class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
             <BookmarkSquareIcon         v-if="props.type === 'magazine'"  class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
             <NewspaperIcon              v-if="props.type === 'newspaper'" class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
             <ClipboardDocumentCheckIcon v-if="props.type === 'article'"   class="flex m-auto w-40 h-40 stroke-primary stroke-1"/>
-            
           </div>
 
           <div class="content flex-col pl-7">
-            <div class="flex text-[30px]">{{ props.title }}</div>
-            <div class="flex text-[12px] mt-2">{{ props.type }}</div>
-            <div class="flex text-[24px] mt-1">{{ props.publisher }}</div>            
-            <div class="flex text-[16px] leading-none mt-2.5">{{ props.notes }}</div>
+            <div class="flex text-[30px]">                    {{ props.title }}     </div>
+            <div class="flex text-[12px] mt-2">               {{ props.type }}      </div>
+            <div class="flex text-[24px] mt-1">               {{ props.publisher }} </div>            
+            <div class="flex text-[16px] mt-2.5 leading-none">{{ props.notes }}     </div>
           </div>
+
         </div>
+
         <div class="card-actions flex w-1/6">
           <button class="flex btn btn-primary ml-auto mt-auto" @click="emit('navigateToDetails')">Book details</button>
         </div>
 
     </div>
-    </div>
+  </div>
     
 
 </div>

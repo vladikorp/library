@@ -1,8 +1,10 @@
 <template>
   <div>
-
+    
+    <CreatePanel/>
     <PageContent>
       
+
       <div class="flex flex-row flex-wrap h-full">
 
         <div class="flex-col justify-start overflow-auto scroll h-full w-full md:w-72 select-none"
@@ -28,13 +30,13 @@
 
           <LInputField
             title="Рік публікації"
-            placeholder="Пошук за назвою"
+            placeholder="Дата"
             v-model:text="bookStore.filter.title"
           />
 
           <LInputField
             title="Видавець"
-            placeholder="Пошук за назвою"
+            placeholder="ПІБ"
             v-model:text="bookStore.filter.title"
           />
 
@@ -130,6 +132,7 @@
 // Vue imports
 import { ref } from 'vue'
 import { useBookStore } from '../store/bookStore'
+import CreatePanel from '../components/layout/CreatePanel.vue';
 
 // Components
 import PageContent from '../components/layout/PageContent.vue';
