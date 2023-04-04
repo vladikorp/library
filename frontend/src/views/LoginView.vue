@@ -1,6 +1,6 @@
 <template>
 
-<PageContent>
+<LPageContent>
 
     <div class="flex flex-col items-center pt-[24px] pb-[18px] w-1/4">
       
@@ -29,10 +29,6 @@
         />
       </div>
 
-      
-
-      
-
       <div class="divider select-none">Або</div>
 
       <div class="flex flex-col flex-wrap">
@@ -40,9 +36,9 @@
         <LButton class="btn-ghost" @click="navigateToForgotPassword" title="Відновити пароль?" />
       </div>
 
-
     </div>
-  </PageContent>
+
+  </LPageContent>
 
 
 </template>
@@ -55,16 +51,61 @@ import { AuthenticationDetails } from "amazon-cognito-identity-js";
 import { useUserStore } from "../store/userStore";
 
 // Components
-import LPageContent from '../components/layout/PageContent.vue'
+import LPageContent from '../components/layout/LPageContent.vue'
 import LInputField  from '../components/controls/LInputField.vue'
-import LButton      from '../components/controls/LButton.vue'
+import LButton      from '../components/controls/buttons/LButton.vue'
 
 // Toast
 import { createToast } from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css'
-import PageContent from "../components/layout/PageContent.vue";
+
+/*
+  Login
+*/
+
+
+const loginData = ref({
+  username: '',
+  password: '',
+});
+
+const loginUser = () => {
+  const cognitoUser = userStore.createCognitoUser(loginData.value.username)
+
+  const authenticationDetails = new AuthenticationDetails({
+    Username: loginData.value.username,
+    Password: loginData.value.password,
+  });
+
+  cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess: async (result) => {
+      userStore.userSession = result
+
+      cognitoUser.getUserAttributes((error, attributes) => {
+        if (error) {
+          userStore.userSession = null
+          userStore.userAttributes = null
+          return
+        }
+        userStore.userAttributes = attributes
+        router.push({ name: "Home" });
+      })
+    },
+    onFailure: (error) => {
+      createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'danger', position: 'top-center'})
+    },
+  });
+};
+
+/*
+  Store
+*/
 
 const userStore = useUserStore()
+
+/*
+  Navigation
+*/
 
 const router = useRouter()
 
@@ -75,45 +116,6 @@ const navigateToRegistration = () => {
 const navigateToForgotPassword = () => {
   router.push({ name: "ForgotPassword" });
 };
-
-const loginData = ref({
-  username: '',
-  password: '',
-});
-
-const loginUser = () => {
-  return null
-}
-
-// const loginUser = () => {
-//   const cognitoUser = userStore.createCognitoUser(loginData.value.username)
-
-//   const authenticationDetails = new AuthenticationDetails({
-//     Username: loginData.value.username,
-//     Password: loginData.value.password,
-//   });
-
-//   cognitoUser.authenticateUser(authenticationDetails, {
-//     onSuccess: async (result) => {
-//       userStore.userSession = result
-
-//       cognitoUser.getUserAttributes((error, attributes) => {
-//         if (error) {
-//           userStore.userSession = null
-//           userStore.userAttributes = null
-//           return
-//         }
-//         userStore.userAttributes = attributes
-//         router.push({ name: "Dashboard" });
-//       })
-//     },
-//     onFailure: (error) => {
-//       createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'danger', position: 'top-center'})
-//     },
-//   });
-// };
-
-
 
 </script>
 

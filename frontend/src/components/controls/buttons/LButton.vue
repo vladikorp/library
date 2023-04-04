@@ -1,5 +1,5 @@
 <template>
-    <button class="btn-primary" @click="emit('click')">
+    <button class="btn" @click="emit('click')">
       <div v-if="props.title">{{ props.title }}</div>
       <slot></slot>
     </button>

@@ -1,131 +1,146 @@
 <template>
 
-  <PageContent>
+  <LPageContent>
   
-      <div class="flex flex-col items-center pt-[24px] pb-[18px] w-1/4">
+      <div class="flex flex-col gap-2 items-center w-1/4 mx-0 my-4">
         
-        <div class="text-2xl font-bold pb-[16px]">
-          Регістрація
-        </div>
+        <LFieldHeader title="Реєстрація" :title-big="true"/>
   
-        <div class="flex flex-col w-full">
+        <!-- Inputs -->
+        <div class="flex flex-col content-center w-full">
           
           <LInputField
             title="Користувач"
             placeholder="Ім'я користувача"
-            v-model:text="loginData.username"
+            v-model:text="registerData.username"
           />
 
           <LInputField
             title="Email"
             placeholder="Email"
-            v-model:text="loginData.username"
+            v-model:text="registerData.email"
           />
   
           <LInputField
             title="Придумайте пароль"          
             placeholder="Пароль" 
-            v-model:text="loginData.password"
+            v-model:text="registerData.password"
             :is-password="true"
           /> 
 
           <LInputField
             title="Продублюйте пароль"          
             placeholder="Продублюйте пароль" 
-            v-model:text="loginData.password"
+            v-model:text="registerData.passwordCopy"
             :is-password="true"
           /> 
-  
-          <LButton class="w-[230px] m-auto mt-[16px] rounded-md h-10" 
-            title="Зареєструватись"
-            @click="loginUser()"
-          />
+
         </div>
+
+        <!-- Register btn -->
+        <LButton class="btn-primary self-center w-1/2" 
+          title="Зареєструватись"
+          @click="createAccount()"
+        />
   
         <div class="divider select-none">Або</div>
   
-        <div class="flex flex-col flex-wrap">
-          <LButton class="btn-ghost" @click="navigateToLogin" title="Авторизуватися"/>
+        <!-- Other btns -->
+        <div class="flex flex-col flex-wrap my-2">
+          <LButton class="btn-ghost" @click="navigateToLogin" title="Авторизуватись"/>
           <LButton class="btn-ghost" @click="navigateToForgotPassword" title="Відновити пароль?" />
         </div>
   
-  
       </div>
-    </PageContent>
+
+  </LPageContent>
   
+</template>
   
-  </template>
-  
-  <script setup>
-  import { ref } from "vue";
-  import { useRouter } from "vue-router";
-  
-  import { AuthenticationDetails } from "amazon-cognito-identity-js";
-  import { useUserStore } from "../store/userStore";
-  
-  // Components
-  import LPageContent from '../components/layout/PageContent.vue'
-  import LInputField  from '../components/controls/LInputField.vue'
-  import LButton      from '../components/controls/buttons/LButton.vue'
-  
-  // Toast
-  import { createToast } from 'mosha-vue-toastify';
-  import 'mosha-vue-toastify/dist/style.css'
-  import PageContent from "../components/layout/PageContent.vue";
-  
-  const userStore = useUserStore()
-  
-  const router = useRouter()
-  
-  const navigateToLogin = () => {
-    router.push({ name: "Login" })
+<script setup>
+
+// Vue imports
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+// Functional imports
+import { CognitoUserAttribute } from "amazon-cognito-identity-js";
+import { useUserStore } from "../store/userStore";
+
+// Components
+import LPageContent from '../components/layout/LPageContent.vue'
+import LInputField  from '../components/controls/LInputField.vue'
+import LButton      from '../components/controls/buttons/LButton.vue'
+import LFieldHeader from '../components/controls/LFieldHeader.vue';
+
+// Toast
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css'
+
+/*
+  Registration
+*/
+
+const registerData = ref({
+  email: "",
+  username: "",
+  password: "",
+  passwordCopy: "",
+});
+
+const createAccount = () => {
+  if (!isEqual(registerData.value.password, registerData.value.passwordCopy)) {
+    createToast({ title: 'Паролі не співпадають!', description: 'Впевніться у правильності введених даних.'}, {type: 'danger', position: 'top-center'})
+    return
   }
-  
-  const navigateToForgotPassword = () => {
-    router.push({ name: "ForgotPassword" });
-  };
-  
-  const loginData = ref({
-    username: '',
-    password: '',
-  });
-  
-  const loginUser = () => {
-    return null
-  }
-  
-  // const loginUser = () => {
-  //   const cognitoUser = userStore.createCognitoUser(loginData.value.username)
-  
-  //   const authenticationDetails = new AuthenticationDetails({
-  //     Username: loginData.value.username,
-  //     Password: loginData.value.password,
-  //   });
-  
-  //   cognitoUser.authenticateUser(authenticationDetails, {
-  //     onSuccess: async (result) => {
-  //       userStore.userSession = result
-  
-  //       cognitoUser.getUserAttributes((error, attributes) => {
-  //         if (error) {
-  //           userStore.userSession = null
-  //           userStore.userAttributes = null
-  //           return
-  //         }
-  //         userStore.userAttributes = attributes
-  //         router.push({ name: "Dashboard" });
-  //       })
-  //     },
-  //     onFailure: (error) => {
-  //       createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'danger', position: 'top-center'})
-  //     },
-  //   });
-  // };
-  
-  
-  
-  </script>
-  
-  <style scoped>
-  
-  </style>
+
+  const userAttributes = [];
+  userAttributes.push(
+    new CognitoUserAttribute({
+      Name: "email",
+      Value: registerData.value.email,
+    })
+  );
+
+  userStore.userPool.signUp(
+    registerData.value.username,
+    registerData.value.password,
+    ы,
+    null,
+    (error) => {
+      if (error) {
+        createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'danger', position: 'top-center'})
+        return;
+      }
+
+      createToast({ title: 'Обліковий запис успішно створено!', description: 'Вам було надіслано лист підтвердження на пошту.'}, {type: 'success', position: 'top-center'})
+      router.push({ name: "Login" });
+    }
+  );
+};
+
+/*
+  Store
+*/
+
+const userStore = useUserStore()
+
+/*
+  Navigation
+*/
+
+const router = useRouter()
+
+const navigateToLogin = () => {
+  router.push({ name: "Login" })
+}
+
+const navigateToForgotPassword = () => {
+  router.push({ name: "ForgotPassword" });
+};
+
+</script>
+
+<style scoped>
+
+</style>
