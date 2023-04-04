@@ -66,6 +66,7 @@ import { useRouter } from "vue-router";
 // Functional imports
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import { useUserStore } from "../store/userStore";
+import isEqual from "lodash.isequal";
 
 // Components
 import LPageContent from '../components/layout/LPageContent.vue'
@@ -105,7 +106,7 @@ const createAccount = () => {
   userStore.userPool.signUp(
     registerData.value.username,
     registerData.value.password,
-    ы,
+    userAttributes,
     null,
     (error) => {
       if (error) {

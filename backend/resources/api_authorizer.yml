@@ -10,4 +10,4 @@ Resources:
       RestApiId:
         Ref: ApiGatewayRestApi
       ProviderARNs:
-        - arn:aws:cognito-idp:us-east-1:829092859139:userpool/us-east-1_6xTiGrq5P
+        - arn:aws:cognito-idp:us-east-1:829092859139:userpool/us-east-1_59mR9kDu1
