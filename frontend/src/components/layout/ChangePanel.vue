@@ -20,7 +20,7 @@
   </template>
   
   <script setup>
-  import LModalButton from '../controls/LModalButton.vue';
+  import LModalButton from '../controls/buttons/LModalButton.vue';
   </script>
   
   <style lang="scss" scoped>

@@ -42,10 +42,6 @@
           />
         </div>
   
-        
-  
-        
-  
         <div class="divider select-none">Або</div>
   
         <div class="flex flex-col flex-wrap">
@@ -70,7 +66,7 @@
   // Components
   import LPageContent from '../components/layout/PageContent.vue'
   import LInputField  from '../components/controls/LInputField.vue'
-  import LButton      from '../components/controls/LButton.vue'
+  import LButton      from '../components/controls/buttons/LButton.vue'
   
   // Toast
   import { createToast } from 'mosha-vue-toastify';

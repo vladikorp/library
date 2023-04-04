@@ -28,7 +28,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import LButton from './LButton.vue';
+import LButton from './buttons/LButton.vue';
 import LFieldHeader from './LFieldHeader.vue';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 
