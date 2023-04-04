@@ -1,0 +1,51 @@
+service: my-api
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+  stage: dev
+  environment:
+    user_pool_id: us-east-1_l6aW4OJ2m
+    client_id: 2a64v33th06gk4kskknmjua07s
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cognito-idp:AdminInitiateAuth
+        - cognito-idp:AdminCreateUser
+        - cognito-idp:AdminSetUserPassword
+      Resource: "*"
+
+functions:
+  hello_world:
+    handler: lambdas/helloWorld.lambda_handler
+    events:
+      - http:
+          cors:
+            origin: '*' 
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiAuthorizer
+          path: /helloWorld
+          method: post
+
+  hello_world_no_auth:
+    handler: lambdas/helloWorld.lambda_handler
+    events:
+      - http:
+          cors:
+            origin: '*' 
+          # authorizer:
+          #   type: COGNITO_USER_POOLS
+          #   authorizerId:
+          #     Ref: ApiAuthorizer
+          path: /helloWorldNoAuth
+          method: post
+
+resources:
+  # DynamoDB
+  - ${file(resources/dynamodb_table.yml)}
+
+  # API Authorizer
+  - ${file(resources/api_authorizer.yml)}

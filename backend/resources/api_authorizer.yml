@@ -1,0 +1,13 @@
+Resources:
+  ApiAuthorizer:
+    DependsOn:
+      - ApiGatewayRestApi
+    Type: AWS::ApiGateway::Authorizer
+    Properties:
+      Name: dev_authorizer
+      IdentitySource: method.request.header.Authorization
+      Type: COGNITO_USER_POOLS
+      RestApiId:
+        Ref: ApiGatewayRestApi
+      ProviderARNs:
+        - arn:aws:cognito-idp:us-east-1:829092859139:userpool/us-east-1_6xTiGrq5P
