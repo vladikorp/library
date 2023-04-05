@@ -1,7 +1,8 @@
 <template>
     <button class="btn" @click="emit('click')">
-      <div v-if="props.title" class="m-2">{{ props.title }}</div>
       <slot></slot>
+      
+      <div v-if="props.title" class="m-2">{{ props.title }}</div>
     </button>
 </template>
 
