@@ -20,7 +20,7 @@
 
     <div class="flex flex-row flex-wrap h-full">
 
-      <div class="flex-col justify-start overflow-auto scroll h-full w-full md:w-72 select-none"
+      <div class="flex-col justify-start md:w-72 select-none overscroll-y-auto"
           :class="showFilters ? '': 'hidden md:flex'">
         
         <LInputField
@@ -59,7 +59,7 @@
 
     <div class="divider lg:divider-horizontal"></div>
 
-    <div class="bookList flex flex-col">
+    <div class="flex flex-col">
 
       <BookCardComponent 
       :type="mockBook.type" 

@@ -25,7 +25,7 @@
         </div>
 
         <div class="card-actions flex w-1/6">
-          <button class="flex btn btn-primary ml-auto mt-auto" @click="emit('navigateToDetails')">Book details</button>
+          <LButton class="btn-outline btn-primary ml-auto mt-auto" title="Детальніше" @click="emit('navigateToDetails')"/>
         </div>
 
     </div>
@@ -36,6 +36,7 @@
 </template>
 
 <script setup>
+import LButton from '../controls/buttons/LButton.vue';
 
 import { BookOpenIcon, BookmarkSquareIcon, NewspaperIcon, ClipboardDocumentCheckIcon } from '@heroicons/vue/24/outline'
 
