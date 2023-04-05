@@ -11,7 +11,7 @@ const routes = [
       {
         path: "login",
         name: "Login",
-        component: () => import('../views/LoginView.vue'),
+        component: () => import('../views/auth/LoginView.vue'),
         meta: {
           showNavbar: false,
         }
@@ -19,7 +19,7 @@ const routes = [
       {
         path: "register",
         name: "Registration",
-        component: () => import('../views/RegisterView.vue'),
+        component: () => import('../views/auth/RegisterView.vue'),
         meta: {
           showNavbar: false
         }
@@ -27,7 +27,7 @@ const routes = [
       {
         path: "forgotPassword",
         name: "ForgotPassword",
-        component: () => import('../views/ForgotPasswordView.vue'),
+        component: () => import('../views/auth/ForgotPasswordView.vue'),
         meta: {
           showNavbar: false
         }
@@ -73,7 +73,7 @@ const routes = [
   {
     path: '/pathMatch(.*)*',
     redirect: () => {
-      return { path: `/${process.env.VUE_APP_I18N_LOCALE}`}
+      return { path: `/home`}
     },
   }
 ]

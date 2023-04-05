@@ -65,14 +65,14 @@ import { useRouter } from "vue-router";
 
 // Functional imports
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "../../store/userStore";
 import isEqual from "lodash.isequal";
 
 // Components
-import LPageContent from '../components/layout/LPageContent.vue'
-import LInputField  from '../components/controls/LInputField.vue'
-import LButton      from '../components/controls/buttons/LButton.vue'
-import LFieldHeader from '../components/controls/LFieldHeader.vue';
+import LPageContent from '../../components/layout/LPageContent.vue'
+import LInputField  from '../../components/controls/LInputField.vue'
+import LButton      from '../../components/controls/buttons/LButton.vue'
+import LFieldHeader from '../../components/controls/LFieldHeader.vue';
 
 // Toast
 import { createToast } from 'mosha-vue-toastify';

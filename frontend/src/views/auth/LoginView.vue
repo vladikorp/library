@@ -7,7 +7,7 @@
       <LFieldHeader title="Авторизація" :title-big="true"/>
 
       <!-- Input fields -->
-      <div class="flex flex-col content-center w-full">
+      <div class="flex flex-col w-full">
         
         <LInputField
           title="Користувач"
@@ -22,7 +22,6 @@
           :is-password="true"
         /> 
 
-        
       </div>
 
       <!-- Login btn -->
@@ -51,13 +50,13 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 import { AuthenticationDetails } from "amazon-cognito-identity-js";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "../../store/userStore";
 
 // Components
-import LPageContent from '../components/layout/LPageContent.vue'
-import LInputField  from '../components/controls/LInputField.vue'
-import LButton      from '../components/controls/buttons/LButton.vue'
-import LFieldHeader from '../components/controls/LFieldHeader.vue';
+import LPageContent from '../../components/layout/LPageContent.vue'
+import LInputField  from '../../components/controls/LInputField.vue'
+import LButton      from '../../components/controls/buttons/LButton.vue'
+import LFieldHeader from '../../components/controls/LFieldHeader.vue';
 
 // Toast
 import { createToast } from 'mosha-vue-toastify';
@@ -66,7 +65,6 @@ import 'mosha-vue-toastify/dist/style.css'
 /*
   Login
 */
-
 
 const loginData = ref({
   username: '',
@@ -96,7 +94,7 @@ const loginUser = () => {
       })
     },
     onFailure: (error) => {
-      createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'danger', position: 'top-center'})
+      createToast({ title: 'Виникла помилка!', description: error.message || JSON.stringify(error) }, {type: 'warning', position: 'bottom-right'})
     },
   });
 };
