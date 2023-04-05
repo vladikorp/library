@@ -2,13 +2,12 @@
 
 <LPageContent>
 
-    <div class="flex flex-col items-center pt-[24px] pb-[18px] w-1/4">
+  <div class="flex flex-col gap-2 items-center w-1/4 mx-0 my-4">
       
-      <div class="text-2xl font-bold pb-[16px]">
-        Авторизація
-      </div>
+      <LFieldHeader title="Авторизація" :title-big="true"/>
 
-      <div class="flex flex-col w-full">
+      <!-- Input fields -->
+      <div class="flex flex-col content-center w-full">
         
         <LInputField
           title="Користувач"
@@ -23,14 +22,18 @@
           :is-password="true"
         /> 
 
-        <LButton class="w-[230px] m-auto mt-[16px] rounded-md h-10" 
-          title="Авторизуватись"
-          @click="loginUser()"
-        />
+        
       </div>
+
+      <!-- Login btn -->
+      <LButton class="btn-primary self-center w-1/2" 
+        title="Авторизуватись"
+        @click="loginUser()"
+      />
 
       <div class="divider select-none">Або</div>
 
+      <!-- Other btns -->
       <div class="flex flex-col flex-wrap">
         <LButton class="btn-ghost" @click="navigateToRegistration" title="Зареєструватися"/>
         <LButton class="btn-ghost" @click="navigateToForgotPassword" title="Відновити пароль?" />
@@ -54,6 +57,7 @@ import { useUserStore } from "../store/userStore";
 import LPageContent from '../components/layout/LPageContent.vue'
 import LInputField  from '../components/controls/LInputField.vue'
 import LButton      from '../components/controls/buttons/LButton.vue'
+import LFieldHeader from '../components/controls/LFieldHeader.vue';
 
 // Toast
 import { createToast } from 'mosha-vue-toastify';

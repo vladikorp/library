@@ -1,5 +1,6 @@
 <template>
   <ChangePanel/>
+  
   <PageContent class="">
     <div class="flex flex-row w-full">
       <div class="details flex flex-col mr-auto w-[500px]">
@@ -36,7 +37,7 @@
 </template>
 
 <script setup>
-import PageContent from '../components/layout/PageContent.vue';
+import PageContent from '../components/layout/LPageContent.vue';
 import ChangePanel from '../components/layout/ChangePanel.vue';
 import LInputField from '../components/controls/LInputField.vue';
 import LAreaField from '../components/controls/LAreaField.vue';

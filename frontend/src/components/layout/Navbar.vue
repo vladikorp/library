@@ -24,6 +24,11 @@
       </div>
 
       <div class="navbar-end">
+
+        <LButton class="btn-outline btn-primary" @click="signOut">
+          <ArrowLeftOnRectangleIcon class="w-6 h-6"></ArrowLeftOnRectangleIcon>
+        </LButton>
+
       </div>
 
     </div>
@@ -31,9 +36,23 @@
 </template>
 
 <script setup>
-import { HomeIcon, BookOpenIcon } from '@heroicons/vue/24/solid';
+import { useUserStore } from '../../store/userStore';
+import { useRouter } from 'vue-router';
 
 import LBackButton from '../controls/buttons/LBackButton.vue';
+import LButton from '../controls/buttons/LButton.vue';
+
+import { HomeIcon, BookOpenIcon, ArrowLeftOnRectangleIcon } from '@heroicons/vue/24/solid';
+import router from '../../router/router';
+
+const userStore = useUserStore()
+
+const signOut = () => {
+  userStore.signOut()
+  router.push({ name: "Login" })
+}
+
+
 </script>
 
 <style lang="scss" scoped>

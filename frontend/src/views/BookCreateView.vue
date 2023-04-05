@@ -32,7 +32,7 @@
   </template>
   
   <script setup>
-  import PageContent from '../components/layout/PageContent.vue';
+  import PageContent from '../components/layout/LPageContent.vue';
   import CreatePanel from '../components/layout/CreatePanel.vue';
   import LInputField from '../components/controls/LInputField.vue';
   import LAreaField from '../components/controls/LAreaField.vue';

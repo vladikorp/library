@@ -77,6 +77,13 @@ export const useUserStore = defineStore('userStore', {
       return isValid
     },
 
+    signOut() {
+      const cognitoUser = this.userPool.getCurrentUser()
+      if (cognitoUser) {
+        cognitoUser.signOut()
+      }
+    },
+
     createCognitoUser(username) {
       return new CognitoUser({
         Username: username,

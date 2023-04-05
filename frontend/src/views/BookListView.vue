@@ -135,7 +135,7 @@ import { useBookStore } from '../store/bookStore'
 import CreatePanel from '../components/layout/CreatePanel.vue';
 
 // Components
-import PageContent from '../components/layout/PageContent.vue';
+import PageContent from '../components/layout/LPageContent.vue';
 import LInputField from '../components/controls/LInputField.vue';
 import BookCardComponent from '../components/entities/BookCardComponent.vue';
 

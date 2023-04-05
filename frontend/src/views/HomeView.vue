@@ -1,15 +1,15 @@
 <template>
   <div>
 
-    <PageContent>
+    <LPageContent>
       Home page
-    </PageContent>
+    </LPageContent>
 
   </div>
 </template>
 
 <script setup>
-import PageContent from '../components/layout/PageContent.vue';
+import LPageContent from '../components/layout/LPageContent.vue';
 </script>
 
 <style scoped>
