@@ -6,6 +6,7 @@ provider:
   region: us-east-1
   stage: dev
   environment:
+    S3_BUCKET_URL: library-bucket-dev
     user_pool_id: us-east-1_l6aW4OJ2m
     client_id: 2a64v33th06gk4kskknmjua07s
   iamRoleStatements:

@@ -1,0 +1,10 @@
+attrs==22.1.0
+boto3==1.26.3
+botocore==1.29.3
+lambda_decorators==0.6.0
+pytest==7.2.0
+python-dateutil==2.8.2
+s3transfer==0.6.0
+simplejson==3.17.6
+ulid-py==1.1.0
+urllib3==1.26.12
