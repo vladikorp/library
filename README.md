@@ -14,3 +14,7 @@
 ### Install requirements
 cd backend 
 py -m pip install -r .\requirements.txt
+
+### Running tests
+cd backend\tests
+python -m pytest --capture=tee-sys --show-capture=all

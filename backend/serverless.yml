@@ -7,6 +7,7 @@ provider:
   stage: dev
   environment:
     S3_BUCKET_URL: library-bucket-dev
+    URL_DEFAULT_TTL: 60
     user_pool_id: us-east-1_l6aW4OJ2m
     client_id: 2a64v33th06gk4kskknmjua07s
   iamRoleStatements:
@@ -18,31 +19,11 @@ provider:
       Resource: "*"
 
 functions:
-  hello_world:
-    handler: lambdas/helloWorld.lambda_handler
-    events:
-      - http:
-          cors:
-            origin: '*' 
-          authorizer:
-            type: COGNITO_USER_POOLS
-            authorizerId:
-              Ref: ApiAuthorizer
-          path: /helloWorld
-          method: post
+  # storage
+  - ${file(./lambdas/storage/serverless.yml)}
 
-  hello_world_no_auth:
-    handler: lambdas/helloWorld.lambda_handler
-    events:
-      - http:
-          cors:
-            origin: '*' 
-          # authorizer:
-          #   type: COGNITO_USER_POOLS
-          #   authorizerId:
-          #     Ref: ApiAuthorizer
-          path: /helloWorldNoAuth
-          method: post
+  # books
+  - ${file(./lambdas/books/serverless.yml)}
 
 resources:
   # DynamoDB
