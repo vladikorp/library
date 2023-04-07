@@ -1,13 +1,11 @@
 import boto3
-import simplejson as json
+import json
 import os
 import traceback
 import logging
 
 from functools           import wraps
 from botocore.exceptions import ClientError
-
-
 
 def cors_headers(handler_or_origin=None, origin=None, credentials=False):
     """
@@ -78,33 +76,5 @@ def json_dumps(handler):
         print(f'response {response}')
         response['body'] = json.dumps(response['body'], default=lambda o: o.attributes, sort_keys=True, indent=4)
         return response
-
-    return wrapper
-
-def handle_errors(handler):
-    """
-        Captures exceptions and transforms them into our codes
-    """
-
-    @wraps(handler)
-    def wrapper(event, context):
-        try:
-            return handler(event, context)
-
-        # usually a database error
-        except ClientError as err:
-            capture_exception(err)
-            return {"statusCode": 400, "body": {"message": err.response['Error']['Message']}}
-
-        # usually user request parameters are wrong
-        except ValueError as err:
-            capture_exception(err)
-            return {"statusCode": 400, "body": {"message": str(err)}}
-
-        # unhandled 
-        except Exception as err:
-            capture_exception(err)
-            logging.error(traceback.format_exc())
-            return {"statusCode": 503, "body": {"message": "How did you do that? I have to look at logs!"}}
 
     return wrapper

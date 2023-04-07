@@ -6,7 +6,7 @@ provider:
   region: us-east-1
   stage: dev
   environment:
-    S3_BUCKET_URL: library-bucket-dev
+    S3_BUCKET: library-bucket-dev
     URL_DEFAULT_TTL: 60
     user_pool_id: us-east-1_l6aW4OJ2m
     client_id: 2a64v33th06gk4kskknmjua07s
@@ -19,11 +19,18 @@ provider:
       Resource: "*"
 
 functions:
-  # storage
-  - ${file(./lambdas/storage/serverless.yml)}
-
-  # books
-  - ${file(./lambdas/books/serverless.yml)}
+  storage_get_upload_url:
+    handler: lambdas/storage/get_upload_url.lambda_handler
+    events:
+      - http:
+          cors:
+            origin: '*' 
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiAuthorizer            
+          path: /storage/uploadUrl
+          method: get
 
 resources:
   # DynamoDB

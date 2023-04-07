@@ -1,15 +1,16 @@
 import axios from 'axios'
+import { useUserStore } from '../../store/userStore';
 
 const env = import.meta.env
+const userStore = useUserStore()
 
 const libraryApi = axios.create({
-  baseURL: env.BASE_API_URL
+  baseURL: env.VITE_BASE_API_URL
 })
 
 libraryApi.interceptors.request.use(
 	(config) => {
-    // add auth header here
-		// config.headers['Authorization']
+		config.headers['Authorization'] = userStore.idToken
 		return config
 	},
   (error) => {
