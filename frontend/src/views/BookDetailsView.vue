@@ -50,7 +50,16 @@
       </div>
 
       <div class="flex rounded-md h-auto w-2/3 m-2">
-        <LInputFileField v-if="!book.src" class="my-auto mx-auto"/>
+
+        <LButton class="btn-primary mx-auto my-auto" title="Завантажити" @click="showUploadFileModal = true"/>
+        <LModal v-model:show-modal="showUploadFileModal">
+          <template v-slot:box>
+            <UploadFile @fileUploaded="attachFile"></UploadFile>
+          </template>
+        </LModal>
+
+
+        <!-- <LInputFileField v-if="!book.src" class="my-auto mx-auto"/> -->
 
         <iframe v-if="book.src && displayFile" src="test.pdf" frameborder="0">
         </iframe>
@@ -83,9 +92,17 @@ import LInputFileField from '../components/controls/LInputFileField.vue';
 import LPageHeader from '../components/layout/LPageHeader.vue';
 import LButton from '../components/controls/buttons/LButton.vue';
 import LRefreshButton from '../components/controls/buttons/LRefreshButton.vue';
+import LModal from '../components/modal/LModal.vue';
+import UploadFile from '../components/functional/UploadFile.vue';
 
 // Icons
 import { CheckIcon, CloudArrowDownIcon } from '@heroicons/vue/24/outline';
+
+const showUploadFileModal = ref(false)
+
+const attachFile = async (uri) => {
+  // get uri here and write it in book instance
+}
 
 const mockTest = {
   type: "article",
@@ -93,7 +110,6 @@ const mockTest = {
   publisher: "Publisher",
   notes: "Notes: Younus, Arjumand ; Qureshi, M Atif ; Saeed, Muhammad ; Ali, Syed Asim ; Touheed, Nasir ; Qureshi, M Shahid International journal of computer science issues, 2011, Vol.8 (3), p.438"
 }
-
 
 /*
   Book
